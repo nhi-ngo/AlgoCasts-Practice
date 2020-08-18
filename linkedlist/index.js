@@ -119,6 +119,45 @@ class LinkedList {
 
     return null;
   }
+
+  removeAt(index) {
+    if (!this.head) {
+      return null;
+    }
+
+    if (index === 0) {
+      this.head = this.head.next;
+      return; // stop any logic from executing
+    }
+
+    const previous = this.getAt(index - 1);
+
+    // if index is out of bounds. Both of the if statement below passed the test.
+    // if (index === this.size()) {
+    //   return;
+    // }
+
+    if (!previous || !previous.next) {
+      return;
+    }
+
+    previous.next = previous.next.next;
+  }
+
+  insertAt(data, index) {
+    if (!this.head) {
+      this.head = new Node(data);
+    }
+
+    if (index === 0) {
+      this.head = new Node(data, this.head);
+      return;
+    }
+
+    const previous = this.getAt(index - 1) || this.getLast();
+
+    previous.next = new Node(data, previous.next);
+  }
 }
 
 module.exports = { Node, LinkedList };
