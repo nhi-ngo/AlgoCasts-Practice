@@ -36,11 +36,29 @@ function selectionSort(arr) {
 }
 
 function mergeSort(arr) {
+  if (arr.length === 1) {
+    return arr
+  } else {
+    let midpoint = Math.floor(arr.length / 2)
+    let left = arr.slice(0, midpoint)
+    let right = arr.slice(midpoint, arr.length)
 
+    return merge(mergeSort(left), mergeSort(right))
+  }
 }
 
 function merge(left, right) {
+  let mergedArray = []
 
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      mergedArray.push(left.shift())
+    } else {
+      mergedArray.push(right.shift())
+    }
+  }
+
+  return [...mergedArray, ...left, ...right];
 }
 
 module.exports = { bubbleSort, selectionSort, mergeSort, merge };
